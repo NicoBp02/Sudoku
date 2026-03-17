@@ -1,5 +1,4 @@
-
-import com.murcia.utils.Consola;
+import com.murcia.utils.*;
 
 public class Sudoku {
     private Tablero tablero;
@@ -12,9 +11,19 @@ public class Sudoku {
 
     public void iniciarNuevoJuego() {
         Consola.clrscr();
+        String jugada = "";
         do {
+            Consola.clrscr(); Consola.gotoxy(0, 0);
             System.out.print(tablero);
+            jugada = Input.nextLine("\nJugada --> fila,columna,valor: ");
+
+            String[] partes = jugada.split(",\\s*");
+            int [] numeros = new int[partes.length];
+            for (int i = 0; i < partes.length; i++)
+                numeros[i] = Integer.parseInt(partes[i]);
             
+            if (tablero.esMovimientoValido(numeros[0], numeros[1], numeros[2]))
+                tablero.asignarValor(numeros[0], numeros[1], numeros[2]);
         } while (true);
     }
 
